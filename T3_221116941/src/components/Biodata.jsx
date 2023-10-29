@@ -140,7 +140,7 @@ function Biodata(props){
                 <form>
                     <div className="flex px-5">
                         <div className="w-full px-3">
-                            <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w" />
+                            <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-1/2 pt-1 pl-2 pb-1" />
                         </div>
                     </div>
                 </form>
