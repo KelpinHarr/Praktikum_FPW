@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from '@hookform/resolvers/joi'
@@ -32,6 +33,15 @@ function Biodata(props){
         about: Joi.string().max(100).required().messages({
             'string.empty' : 'Field tidak boleh kosong',
             'string.max' : 'Maksimal 100 kata'
+        }),
+        place: Joi.string().required().messages({
+            'string.empty' : 'Place harus diisi'
+        }),
+        start: Joi.string().required().messages({
+            'string.empty' : 'Start harus diisi'
+        }),
+        end: Joi.string().required().messages({
+            'string.empty' : 'End harus diisi'
         })
     })
 
@@ -50,12 +60,45 @@ function Biodata(props){
     const addBio = data => {
         console.log(data)
         const kode = props.bio[props.bio.length-1].id + 1;
-        const newBook = {
+        const newBio = {
             kode,
             ...data
         }
-        props.setBio([...props.bio, newBook])
+        props.setBio([...props.bio, newBio])
         reset()
+    }
+
+    const [isCheckedHS, setIsCheckedHS] = useState(props.checkedHS)
+    const [isCheckedDiploma, setIsCheckedDiploma] = useState(props.checkedDiploma)
+    const [isCheckedBachelor, setIsCheckedBachelor] = useState(props.checkedBachelor)
+    const [isCheckedMaster, setIsCheckedMaster] = useState(props.isCheckedMaster)
+
+    const cbxHS = (e) => {
+        const checked = e.target.checked;
+        setIsCheckedHS(checked);
+
+        props.setCheckedHS(checked)
+    }
+
+    const cbxDip = (e) => {
+        const checked = e.target.checked;
+        setIsCheckedDiploma(checked);
+        
+        props.setCheckedDiploma(checked)
+    }
+
+    const cbxBachelor = (e) => {
+        const checked = e.target.checked;
+        setIsCheckedBachelor(checked);
+
+        props.setCheckedBachelor(checked);
+    }
+
+    const cbxMaster = (e) => {
+        const checked = e.target.checked;
+        setIsCheckedMaster(checked);
+
+        props.setCheckedMaster(checked);
     }
 
     return(
@@ -103,7 +146,7 @@ function Biodata(props){
                                 }} className="ml-1">{errors.domicile.message}</span>}
                             </div>
                             <div className="w-1/2 px-3">
-                                <input type="text" placeholder="LinkedIn ID" className="border rounded-lg border-1 border-black w-full mt-3 mb-3 pt-1 pl-2 pb-1" {...register('LinkedIn_ID')}/>
+                                <input type="text" placeholder="LinkedIn ID" className="border rounded-lg border-1 border-black w-full mt-3 mb-3 pt-1 pl-2 pb-1" {...register('linkedIn_ID')}/>
 
                                 {errors.linkedIn_ID && <span style={{
                                     color: "red"
@@ -125,26 +168,171 @@ function Biodata(props){
                 <p className="text-xl m-8"><strong>About myself</strong></p>
                 <div className="flex px-5">
                     <div className="w-full px-3 mb-5">
-                        <textarea name="" id="" cols="30" rows="10" className="border rounded-lg border-1 border-black w-full mb-3 pt-1 pl-2 pb-1" {...register('about')}></textarea>
+                        <form action="">
+                            <textarea name="" id="" cols="30" rows="10" className="border rounded-lg border-1 border-black w-full mb-3 pt-1 pl-2 pb-1 h-48" {...register('about')} />
+
+                            {errors.about && <span style={{
+                                color: "red"
+                            }} className="ml-1">{errors.about.message}</span>}
+                        </form>
+                        
                     </div>
                 </div>
             </div> 
             <div className="border rounded-lg bg-white w-11/12 ml-20 mt-3">
-                <p className="text-xl m-8"><strong>Education</strong></p>
+                <p className="text-xl ml-8 mt-8"><strong>Education</strong></p>
+
+                {/* High School */}
                 <div className="flex">
-                    <div className="ml-8">
-                        <input type="checkbox" className="" defaultChecked={props.checked} onChange={(e) => props.setChecked(e.target.value)}/>
+                    <div className="ml-8 mt-6">
+                        <input type="checkbox" checked={isCheckedHS} onChange={cbxHS}/>
                     </div>
-                    <p className="text-lg ml-3">High School</p>
+                    <p className="text-lg ml-3 mt-5">High School</p>
                 </div>
-                <form>
-                    <div className="flex px-5">
-                        <div className="w-full px-3">
-                            <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-1/2 pt-1 pl-2 pb-1" />
+                {
+                    props.checkedHS ?
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
+                                {errors.place && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.place.message}</span>}
+                            </div>
+
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
+                                {errors.start && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.start.message}</span>}
+                            </div>
+
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
+                                {errors.end && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.end.message}</span>}
+                            </div>
                         </div>
+                    </form>
+                    :
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                        </div>
+                    </form>
+                }
+
+                {/* Diploma */}
+                <div className="flex">
+                    <div className="ml-8 mt-6">
+                        <input type="checkbox" checked={isCheckedDiploma} onChange={cbxDip}/>
                     </div>
-                </form>
+                    <p className="text-lg ml-3 mt-5">Diploma Degree (D3)</p>
+                </div>
+                {
+                    props.checkedDiploma ?
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-full px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
+                                {errors.place && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.place.message}</span>}
+
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" {...register('start')}/>
+                                {errors.start && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.start.message}</span>}
+
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" {...register('end')}/>
+                                {errors.end && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.end.message}</span>}
+                            </div>
+                        </div>
+                    </form>
+                    :
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-full px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" disabled />
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
+                            </div>
+                        </div>
+                    </form>
+                }
+
+                {/* Bachelor */}
+                <div className="flex">
+                    <div className="ml-8 mt-6">
+                        <input type="checkbox" className="" checked={isCheckedBachelor} onChange={cbxBachelor}/>
+                    </div>
+                    <p className="text-lg ml-3 mt-5">Bachelor Degree (S1)</p>
+                </div>
+                {
+                    props.checkedBachelor ?
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-full px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" />
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
+                            </div>
+                        </div>
+                    </form>
+                    :
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-full px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" disabled />
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
+                            </div>
+                        </div>
+                    </form>
+                }
+
+                {/* Master */}
+                <div className="flex">
+                    <div className="ml-8 mt-6">
+                        <input type="checkbox" className="" checked={isCheckedMaster} onChange={cbxMaster}/>
+                    </div>
+                    <p className="text-lg ml-3 mt-5">Master Degree (S2)</p>
+                </div>
+                {
+                    props.checkedMaster ?
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-full px-3 mb-8">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" />
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
+                            </div>
+                        </div>
+                    </form>
+                    :
+                    <form>
+                        <div className="flex px-5">
+                            <div className="w-full px-3 mb-8">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" disabled/>
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled/>
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled/>
+                            </div>
+                        </div>
+                    </form>                    
+                }
             </div>
+            <button className='border rounded-lg bg-red-400 text-white w-24 h-9 mt-3 ml-20' onClick={handleSubmit(addBio)}>Generate</button>
         </>
     )
 }
