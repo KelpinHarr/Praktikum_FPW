@@ -242,18 +242,22 @@ function Biodata(props){
                     props.checkedDiploma ?
                     <form>
                         <div className="flex px-5">
-                            <div className="w-full px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
                                 {errors.place && <span style={{
                                     color: "red"
                                 }} className="ml-1">{errors.place.message}</span>}
+                            </div>
 
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" {...register('start')}/>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
                                 {errors.start && <span style={{
                                     color: "red"
                                 }} className="ml-1">{errors.start.message}</span>}
+                            </div>
 
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" {...register('end')}/>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
                                 {errors.end && <span style={{
                                     color: "red"
                                 }} className="ml-1">{errors.end.message}</span>}
@@ -263,10 +267,14 @@ function Biodata(props){
                     :
                     <form>
                         <div className="flex px-5">
-                            <div className="w-full px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" disabled />
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
                             </div>
                         </div>
                     </form>
@@ -283,20 +291,39 @@ function Biodata(props){
                     props.checkedBachelor ?
                     <form>
                         <div className="flex px-5">
-                            <div className="w-full px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" />
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
+                                {errors.place && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.place.message}</span>}
+                            </div>
+
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
+                                {errors.start && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.start.message}</span>}
+                            </div>
+
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
+                                {errors.end && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.end.message}</span>}
                             </div>
                         </div>
                     </form>
                     :
                     <form>
                         <div className="flex px-5">
-                            <div className="w-full px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" disabled />
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled />
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
                             </div>
                         </div>
                     </form>
@@ -313,23 +340,42 @@ function Biodata(props){
                     props.checkedMaster ?
                     <form>
                         <div className="flex px-5">
-                            <div className="w-full px-3 mb-8">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" />
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" />
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
+                                {errors.place && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.place.message}</span>}
+                            </div>
+
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
+                                {errors.start && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.start.message}</span>}
+                            </div>
+
+                            <div className="w-1/12 px-3 mb-8">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
+                                {errors.end && <span style={{
+                                    color: "red"
+                                }} className="ml-1">{errors.end.message}</span>}
                             </div>
                         </div>
                     </form>
                     :
                     <form>
                         <div className="flex px-5">
-                            <div className="w-full px-3 mb-8">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-5/6 pt-1 pl-2 pb-1 mt-4" disabled/>
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled/>
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-24 pt-1 pl-2 pb-1 mt-4 ml-7" disabled/>
+                            <div className="w-5/6 px-3">
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3">
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
+                            </div>
+                            <div className="w-1/12 px-3 mb-8">
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" disabled />
                             </div>
                         </div>
-                    </form>                    
+                    </form>                   
                 }
             </div>
             <button className='border rounded-lg bg-red-400 text-white w-24 h-9 mt-3 ml-20' onClick={handleSubmit(addBio)}>Generate</button>
