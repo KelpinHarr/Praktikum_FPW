@@ -8,7 +8,7 @@ function App() {
   const [checkedDiploma, setCheckedDiploma] = useState(false);
   const [checkedBachelor, setCheckedBachelor] = useState(false);
   const [checkedMaster, setCheckedMaster] = useState(false);
-  const [id, setId] = useState(1)
+  const [id, setId] = useState(2)
   const [bio, setBio] = useState([{
     "id" : 0,
     "nama" : '',
@@ -22,7 +22,16 @@ function App() {
     "high_school" : '',
     "diploma" : '',
     "bachelor" : '',
-    "master" : ''
+    "master" : '',
+    "exp" : []
+  }])
+
+  const [item, setItem] = useState([{
+    "id" : 1,
+    "title" : '',
+    "desc" : '',
+    "start" : '',
+    "end" : ''
   }])
 
   return (
@@ -30,7 +39,7 @@ function App() {
       <p className='text-3xl mt-10 text-center'><strong>CV Maker</strong></p>
       <button className='border rounded-lg bg-red-400 text-white w-24 h-9 mt-3 ml-20'>Clear</button>
 
-      <Biodata bio={bio} id={id} checkedHS={checkedHS} checkedDiploma={checkedDiploma} checkedBachelor={checkedBachelor} checkedMaster={checkedMaster} setBio={setBio} setId={setId} setCheckedHS={setCheckedHS} setCheckedDiploma={setCheckedDiploma} setCheckedBachelor={setCheckedBachelor} setCheckedMaster={setCheckedMaster}/>
+      <Biodata bio={bio} id={id} item={item} checkedHS={checkedHS} checkedDiploma={checkedDiploma} checkedBachelor={checkedBachelor} checkedMaster={checkedMaster} setBio={setBio} setId={setId} setCheckedHS={setCheckedHS} setCheckedDiploma={setCheckedDiploma} setCheckedBachelor={setCheckedBachelor} setCheckedMaster={setCheckedMaster} setItem={setItem}/>
     </>
   )
 }
