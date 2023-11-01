@@ -24,7 +24,7 @@ function Biodata(props){
         domicile: Joi.string().required().messages({
             'string.empty' : 'Domisili tidak boleh kosong'
         }),
-        linkedIn_ID: Joi.string().required().messages({
+        linkedIn_id: Joi.string().required().messages({
             'string.empty' : 'LinkedIn ID tidak boleh kosong'
         }),
         photo_url: Joi.string().required().messages({
@@ -34,35 +34,63 @@ function Biodata(props){
             'string.empty' : 'Field tidak boleh kosong',
             'string.max' : 'Maksimal 100 kata'
         }),
-        place: Joi.string().required().messages({
+        high_school: Joi.string().required().messages({
             'string.empty' : 'Place harus diisi'
         }),
-        start: Joi.string().required().messages({
+        diploma: Joi.string().required().messages({
+            'string.empty' : 'Place harus diisi'
+        }),
+        bachelor: Joi.string().required().messages({
+            'string.empty' : 'Place harus diisi'
+        }),
+        master: Joi.string().required().messages({
+            'string.empty' : 'Place harus diisi'
+        }),
+        start_hs: Joi.string().required().messages({
             'string.empty' : 'Start harus diisi'
         }),
-        end: Joi.string().required().messages({
+        end_hs: Joi.string().required().messages({
+            'string.empty' : 'End harus diisi'
+        }),
+        start_diploma: Joi.string().required().messages({
+            'string.empty' : 'Start harus diisi'
+        }),
+        end_diploma: Joi.string().required().messages({
+            'string.empty' : 'End harus diisi'
+        }),
+        start_bachelor: Joi.string().required().messages({
+            'string.empty' : 'Start harus diisi'
+        }),
+        end_bachelor: Joi.string().required().messages({
+            'string.empty' : 'End harus diisi'
+        }),
+        start_master: Joi.string().required().messages({
+            'string.empty' : 'Start harus diisi'
+        }),
+        end_master: Joi.string().required().messages({
             'string.empty' : 'End harus diisi'
         }),
         titleExp: Joi.string().required().messages({
-            'string.empty' : 'Title Experience harus diisi'
+            'string.empty' : 'Title harus diisi'
         }),
         placeExp: Joi.string().required().messages({
-            'string.empty' : "Place Experience harus diisi"
+            'string.empty' : 'Place harus diisi'
         }),
         descExp: Joi.string().required().messages({
-            'string.empty' : "Description harus diisi"
+            'string.empty' : 'Description harus diisi'
         }),
         startExp: Joi.string().required().messages({
-            'string.empty' : "Start harus diisi"
+            'string.empty' : 'Start harus diisi'
         }),
         endExp: Joi.string().required().messages({
-            'string.empty' : "End harus diisi"
-        })
+            'string.empty' : 'End harus diisi'
+        }),
     })
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: joiResolver(schema)
     });
+
 
     const handlePrint = () => {
         const printContents = document.getElementById('content').innerHTML;
@@ -81,23 +109,22 @@ function Biodata(props){
         }
         props.setBio([...props.bio, newBio])
         reset()
+        props.setMode(1);
     }
-
     function handlerMenu(){
-        // const kode = props.item[props.item.length-1].id + 1;
-        // const newItem = {
-        //     id: kode,
-        //     title: {...register('titleExp')},
-        //     place: {...register('placeExp')},
-        //     desc: {...register('descExp')},
-        //     startExp: {...register('startExp')},
-        //     endExp: {...register('endExp')}
-        // }
-        // props.setItem([...props.item, newItem]);
+        const kode = props.item[props.item.length-1].id + 1;
+        const newItem = {
+            id: kode,
+            title: title,
+            place: place,
+            desc: desc,
+            startExp: start,
+            endExp: end
+        }
+        props.setItem([...props.item, newItem]);
     }
-
     function delMenu(id){
-        props.setItem(props.item.filter((items) => items.id != id))
+        list.props.setItem(list.props.item.filter((items) => items.id != id))
     }
 
     const [isCheckedHS, setIsCheckedHS] = useState(props.checkedHS)
@@ -188,11 +215,11 @@ function Biodata(props){
                                 }} className="ml-1">{errors.domicile.message}</span>}
                             </div>
                             <div className="w-1/2 px-3">
-                                <input type="text" placeholder="LinkedIn ID" className="border rounded-lg border-1 border-black w-full mt-3 mb-3 pt-1 pl-2 pb-1" {...register('linkedIn_ID')}/>
+                                <input type="text" placeholder="LinkedIn ID" className="border rounded-lg border-1 border-black w-full mt-3 mb-3 pt-1 pl-2 pb-1" {...register('linkedIn_id')}/>
 
-                                {errors.linkedIn_ID && <span style={{
+                                {errors.linkedIn_id && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.linkedIn_ID.message}</span>}
+                                }} className="ml-1">{errors.linkedIn_id.message}</span>}
                             </div>
                     </div>
                     <div className="flex px-5">
@@ -236,24 +263,24 @@ function Biodata(props){
                     <form>
                         <div className="flex px-5">
                             <div className="w-5/6 px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
-                                {errors.place && <span style={{
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('high_school')}/>
+                                {errors.high_school && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.place.message}</span>}
+                                }} className="ml-1">{errors.high_school.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
-                                {errors.start && <span style={{
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start_hs')}/>
+                                {errors.start_hs && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.start.message}</span>}
+                                }} className="ml-1">{errors.start_hs.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
-                                {errors.end && <span style={{
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end_hs')}/>
+                                {errors.end_hs && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.end.message}</span>}
+                                }} className="ml-1">{errors.end_hs.message}</span>}
                             </div>
                         </div>
                     </form>
@@ -285,24 +312,24 @@ function Biodata(props){
                     <form>
                         <div className="flex px-5">
                             <div className="w-5/6 px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
-                                {errors.place && <span style={{
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('diploma')}/>
+                                {errors.diploma && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.place.message}</span>}
+                                }} className="ml-1">{errors.diploma.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
-                                {errors.start && <span style={{
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start_diploma')}/>
+                                {errors.start_diploma && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.start.message}</span>}
+                                }} className="ml-1">{errors.start_diploma.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
-                                {errors.end && <span style={{
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end_diploma')}/>
+                                {errors.end_diploma && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.end.message}</span>}
+                                }} className="ml-1">{errors.end_diploma.message}</span>}
                             </div>
                         </div>
                     </form>
@@ -334,24 +361,24 @@ function Biodata(props){
                     <form>
                         <div className="flex px-5">
                             <div className="w-5/6 px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
-                                {errors.place && <span style={{
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('bachelor')}/>
+                                {errors.bachelor && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.place.message}</span>}
+                                }} className="ml-1">{errors.bachelor.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
-                                {errors.start && <span style={{
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start_bachelor')}/>
+                                {errors.start_bachelor && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.start.message}</span>}
+                                }} className="ml-1">{errors.start_bachelor.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
-                                {errors.end && <span style={{
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end_bachelor')}/>
+                                {errors.end_bachelor && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.end.message}</span>}
+                                }} className="ml-1">{errors.end_bachelor.message}</span>}
                             </div>
                         </div>
                     </form>
@@ -383,24 +410,24 @@ function Biodata(props){
                     <form>
                         <div className="flex px-5">
                             <div className="w-5/6 px-3">
-                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('place')}/>
-                                {errors.place && <span style={{
+                                <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('master')}/>
+                                {errors.master && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.place.message}</span>}
+                                }} className="ml-1">{errors.master.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3">
-                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start')}/>
-                                {errors.start && <span style={{
+                                <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('start_master')}/>
+                                {errors.start_master && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.start.message}</span>}
+                                }} className="ml-1">{errors.start_master.message}</span>}
                             </div>
 
                             <div className="w-1/12 px-3 mb-8">
-                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end')}/>
-                                {errors.end && <span style={{
+                                <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('end_master')}/>
+                                {errors.end_master && <span style={{
                                     color: "red"
-                                }} className="ml-1">{errors.end.message}</span>}
+                                }} className="ml-1">{errors.end_master.message}</span>}
                             </div>
                         </div>
                     </form>
