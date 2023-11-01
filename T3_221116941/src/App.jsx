@@ -37,7 +37,6 @@ function App() {
   return (
     <>
       <p className='text-3xl mt-10 text-center'><strong>CV Maker</strong></p>
-      <button className='border rounded-lg bg-red-400 text-white w-24 h-9 mt-3 ml-20'>Clear</button>
 
       <Biodata bio={bio} id={id} item={item} checkedHS={checkedHS} checkedDiploma={checkedDiploma} checkedBachelor={checkedBachelor} checkedMaster={checkedMaster} setBio={setBio} setId={setId} setCheckedHS={setCheckedHS} setCheckedDiploma={setCheckedDiploma} setCheckedBachelor={setCheckedBachelor} setCheckedMaster={setCheckedMaster} setItem={setItem}/>
     </>

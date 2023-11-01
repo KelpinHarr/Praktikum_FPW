@@ -84,16 +84,16 @@ function Biodata(props){
     }
 
     function handlerMenu(){
-        const kode = props.item[props.item.length-1].id + 1;
-        const newItem = {
-            id: kode,
-            title: {...register('titleExp')},
-            place: {...register('placeExp')},
-            desc: {...register('descExp')},
-            startExp: {...register('startExp')},
-            endExp: {...register('endExp')}
-        }
-        props.setItem([...props.item, newItem]);
+        // const kode = props.item[props.item.length-1].id + 1;
+        // const newItem = {
+        //     id: kode,
+        //     title: {...register('titleExp')},
+        //     place: {...register('placeExp')},
+        //     desc: {...register('descExp')},
+        //     startExp: {...register('startExp')},
+        //     endExp: {...register('endExp')}
+        // }
+        // props.setItem([...props.item, newItem]);
     }
 
     function delMenu(id){
@@ -104,6 +104,11 @@ function Biodata(props){
     const [isCheckedDiploma, setIsCheckedDiploma] = useState(props.checkedDiploma)
     const [isCheckedBachelor, setIsCheckedBachelor] = useState(props.checkedBachelor)
     const [isCheckedMaster, setIsCheckedMaster] = useState(props.isCheckedMaster)
+    const [title, setTitle] = useState('');
+    const [place, setPlace] = useState('');
+    const [desc, setDesc] = useState('');
+    const [start, setStart] = useState('');
+    const [end, setEnd] = useState('');
 
     const cbxHS = (e) => {
         const checked = e.target.checked;
@@ -133,8 +138,13 @@ function Biodata(props){
         props.setCheckedMaster(checked);
     }
 
+    const handlerClear = () => {
+        reset();
+    }
+
     return(
         <>
+            <button className='border rounded-lg bg-red-400 text-white w-24 h-9 mt-3 ml-20' onClick={handlerClear}>Clear</button>
             <div className='border rounded-lg bg-white w-11/12 ml-20 mt-7' >
                 <form>
                     <div className="flex px-5">
@@ -412,48 +422,49 @@ function Biodata(props){
             </div>
             <div className="border rounded-lg bg-white w-11/12 ml-20 mt-3">
                 <p className="text-xl ml-8 mt-8"><strong>Experiences</strong></p>
-
                 {
                     props.item.map((items, index) => {
                         return(
                             <>
-                                <div className="flex px-5" key={index}>
-                                    <div className="w-11/12 px-3">
-                                        <input type="text" placeholder="Title" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('titleExp')}/>
-                                        {errors.titleExp && <span style={{
-                                            color: "red"
-                                        }} className="ml-1">{errors.titleExp.message}</span>}
+                                <form action="">
+                                    <div className="flex px-5" key={index}>
+                                        <div className="w-11/12 px-3">
+                                            <input type="text" placeholder="Title" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('titleExp')}/>
+                                            {errors.titleExp && <span style={{
+                                                color: "red"
+                                            }} className="ml-1">{errors.titleExp.message}</span>}
+                                        </div>
+                                        <div className="w-5/6 px-3">
+                                            <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('placeExp')}/>
+                                            {errors.placeExp && <span style={{
+                                                color: "red"
+                                            }} className="ml-1">{errors.placeExp.message}</span>}
+                                        </div>
+                                        <div className="w-1/4 px-3">
+                                            <button onClick={() => delMenu(items.id)}><p className="w-full mt-4 text-2xl">❌</p></button>
+                                        </div>
                                     </div>
-                                    <div className="w-5/6 px-3">
-                                        <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('placeExp')}/>
-                                        {errors.placeExp && <span style={{
-                                            color: "red"
-                                        }} className="ml-1">{errors.placeExp.message}</span>}
+                                    <div className="flex px-5">
+                                        <div className="w-3/4 px-3">
+                                            <input type="text" placeholder="Description" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('descExp')}/>
+                                            {errors.descExp && <span style={{
+                                                color: "red"
+                                            }} className="ml-1">{errors.descExp.message}</span>}
+                                        </div>
+                                        <div className="w-1/12 px-3">
+                                            <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('startExp')}/>
+                                            {errors.startExp && <span style={{
+                                                color: "red"
+                                            }} className="ml-1">{errors.startExp.message}</span>}
+                                        </div>
+                                        <div className="w-1/12 px-3">
+                                            <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('endExp')}/>
+                                            {errors.endExp && <span style={{
+                                                color: "red"
+                                            }} className="ml-1">{errors.endExp.message}</span>}
+                                        </div>
                                     </div>
-                                    <div className="w-1/4 px-3">
-                                        <button onClick={() => delMenu(items.id)}><p className="w-full mt-4 text-2xl">❌</p></button>
-                                    </div>
-                                </div>
-                                <div className="flex px-5">
-                                    <div className="w-3/4 px-3">
-                                        <input type="text" placeholder="Description" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('descExp')}/>
-                                        {errors.descExp && <span style={{
-                                            color: "red"
-                                        }} className="ml-1">{errors.descExp.message}</span>}
-                                    </div>
-                                    <div className="w-1/12 px-3">
-                                        <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('descExp')}/>
-                                        {errors.descExp && <span style={{
-                                            color: "red"
-                                        }} className="ml-1">{errors.descExp.message}</span>}
-                                    </div>
-                                    <div className="w-1/12 px-3">
-                                        <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('descExp')}/>
-                                        {errors.descExp && <span style={{
-                                            color: "red"
-                                        }} className="ml-1">{errors.descExp.message}</span>}
-                                    </div>
-                                </div>
+                                </form>
                             </>
                         )
                     })
@@ -462,7 +473,9 @@ function Biodata(props){
                     <button className="border rounded-lg bg-blue-400 text-white w-24 h-9 mt-5 mr-44 mb-6" onClick={handlerMenu}>Add</button>
                 </div>
             </div>
-            <button className='border rounded-lg bg-red-400 text-white w-24 h-9 mt-3 ml-20' onClick={handleSubmit(addBio)}>Generate</button>
+            <div className="flex justify-center mb-8">
+                <button className='border rounded-lg bg-green-500 text-white w-64 h-12 mt-3 ml-20' onClick={handleSubmit(addBio)}>Generate</button>
+            </div>
         </>
     )
 }
