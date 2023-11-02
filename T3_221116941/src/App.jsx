@@ -18,30 +18,7 @@ function App() {
     "startExp" : '',
     "endExp" : ''
   }])
-  const [bio, setBio] = useState([{
-    "id" : 0,
-    "nama" : '',
-    "title" : '',
-    "phone_number" : '',
-    "email" : '',
-    "domicile" : '',
-    "linkedIn_id" : '',
-    "photo_url" : '',
-    "about" : '',
-    "high_school" : '',
-    "diploma" : '',
-    "bachelor" : '',
-    "master" : '',
-    "start_hs" : '',
-    "end_hs" : '',
-    "start_diploma" : '',
-    "end_diploma" : '',
-    "start_bachelor" : '',
-    "end_bachelor" : '',
-    "start_master" : '',
-    "end_master" : '',
-    "experience" : item
-  }])
+  const [bio, setBio] = useState(null)
 
   return (
     <>
