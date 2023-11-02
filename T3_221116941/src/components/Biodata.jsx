@@ -50,7 +50,7 @@ function Biodata(props){
         props.setItem([...props.item, newItem]);
     }
     function delMenu(id){
-        list.props.setItem(list.props.item.filter((items) => items.id != id))
+        props.setItem(props.item.filter((items) => items.id != id))
     }
 
     const [isCheckedHS, setIsCheckedHS] = useState(props.checkedHS)
@@ -486,26 +486,28 @@ function Biodata(props){
                                 <form action="">
                                     <div className="flex px-5" key={index}>
                                         <div className="w-11/12 px-3">
-                                            <input type="text" placeholder="Title" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('titleExp', {
+                                            <input type="text" placeholder="Title" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register(`titleExp.${items.id - 1}`, {
                                                 required: {
                                                     value: true,
                                                     message: 'Title harus diisi'
                                                 }
                                             })}/>
-                                            {errors.titleExp && <span style={{
+                                            {errors.titleExp && 
+                                                errors.titleExp[items.id - 1] && <span style={{
                                                 color: "red"
-                                            }} className="ml-1">{errors.titleExp.message}</span>}
+                                            }} className="ml-1">{errors.titleExp[items.id - 1].message}</span>}
                                         </div>
                                         <div className="w-5/6 px-3">
-                                            <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('placeExp', {
+                                            <input type="text" placeholder="Place" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register(`placeExp.${items.id - 1}`, {
                                                 required: {
                                                     value: true,
                                                     message: 'Place harus diisi'
                                                 }
                                             })}/>
-                                            {errors.placeExp && <span style={{
+                                            {errors.placeExp && 
+                                                errors.placeExp[items.id - 1] && <span style={{
                                                 color: "red"
-                                            }} className="ml-1">{errors.placeExp.message}</span>}
+                                            }} className="ml-1">{errors.placeExp[items.id - 1].message}</span>}
                                         </div>
                                         <div className="w-1/4 px-3">
                                             <button onClick={() => delMenu(items.id)}><p className="w-full mt-4 text-2xl">❌</p></button>
@@ -513,37 +515,40 @@ function Biodata(props){
                                     </div>
                                     <div className="flex px-5">
                                         <div className="w-3/4 px-3">
-                                            <input type="text" placeholder="Description" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('descExp', {
+                                            <input type="text" placeholder="Description" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register(`descExp.${items.id - 1}`, {
                                                 required: {
                                                     value: true,
                                                     message: 'Description harus diisi'
                                                 }
                                             })}/>
-                                            {errors.descExp && <span style={{
+                                           {errors.descExp && 
+                                                errors.descExp[items.id - 1] && <span style={{
                                                 color: "red"
-                                            }} className="ml-1">{errors.descExp.message}</span>}
+                                            }} className="ml-1">{errors.descExp[items.id - 1].message}</span>}
                                         </div>
                                         <div className="w-1/12 px-3">
-                                            <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('startExp', {
+                                            <input type="text" placeholder="Start" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register(`startExp.${items.id - 1}`, {
                                                 required: {
                                                     value: true,
                                                     message: 'Start harus diisi'
                                                 }
                                             })}/>
-                                            {errors.startExp && <span style={{
+                                           {errors.startExp && 
+                                                errors.startExp[items.id - 1] && <span style={{
                                                 color: "red"
-                                            }} className="ml-1">{errors.startExp.message}</span>}
+                                            }} className="ml-1">{errors.startExp[items.id - 1].message}</span>}
                                         </div>
                                         <div className="w-1/12 px-3">
-                                            <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register('endExp', {
+                                            <input type="text" placeholder="End" className="border rounded-lg border-1 border-black w-full pt-1 pl-2 pb-1 mt-4" {...register(`endExp.${items.id - 1}`, {
                                                 required: {
                                                     value: true,
                                                     message: 'End harus diisi'
                                                 }
                                             })}/>
-                                            {errors.endExp && <span style={{
+                                           {errors.endExp && 
+                                                errors.endExp[items.id - 1] && <span style={{
                                                 color: "red"
-                                            }} className="ml-1">{errors.endExp.message}</span>}
+                                            }} className="ml-1">{errors.endExp[items.id - 1].message}</span>}
                                         </div>
                                     </div>
                                 </form>
