@@ -9,6 +9,17 @@ function Biodata(props){
 
     const addBio = data => {
         console.log(data)
+
+        let newExp = [];
+        for (let i = 0; i < data.titleExp.length; i++){
+            newExp.push({
+                "titleExp" : data.titleExp[i],
+                "placeExp" : data.placeExp[i],
+                "descExp" : data.descExp[i],
+                "startExp" : data.startExp[i],
+                "endExp" : data.endExp[i],
+            })
+        }
         const newBio = {
             nama: data.nama,
             title: data.title,
@@ -30,7 +41,7 @@ function Biodata(props){
             end_bachelor: data.end_bachelor,
             start_master: data.start_master,
             end_master: data.end_master,
-            experience: props.item
+            experience: newExp
         }
         props.setBio(newBio)
         reset()
@@ -92,7 +103,34 @@ function Biodata(props){
     }
 
     const handlerClear = () => {
-        reset();
+        reset({
+            nama: '',
+            title: '',
+            phone_number: '',
+            email: '',
+            domicile: '',
+            linkedIn_id: '',
+            photo_url:'',
+            about: '',
+            high_school: '',
+            start_hs: '',
+            end_hs: '',
+            diploma: '',
+            start_diploma: '',
+            end_diploma: '',
+            bachelor: '',
+            start_bachelor: '',
+            end_bachelor: '',
+            master: '',
+            start_master: '',
+            end_master: '',
+            titleExp: '',
+            placeExp: '',
+            descExp: '',
+            startExp: '',
+            endExp: ''
+        });
+        
     }
 
     return(
@@ -207,6 +245,10 @@ function Biodata(props){
                                 required: {
                                     value: true,
                                     message: 'Field harus diisi'
+                                },
+                                max: {
+                                    value: 100,
+                                    
                                 }
                             })} />
 

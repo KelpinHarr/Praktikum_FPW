@@ -81,7 +81,13 @@ function Preview(props){
                             {
                                 props.bio.experience.map((item, index) => {
                                     return(
-                                        <p className="text-xl">{item.titleExp}</p>
+                                        <>
+                                            <p className="text-2xl ml-20 mt-6"><strong>{item.titleExp}</strong></p>
+                                            <p className="text-xl ml-20 mt-1"><strong>{item.placeExp}</strong></p>
+                                            <p className="text-xl ml-20 mt-1">{item.startExp} - {item.endExp}</p>    
+                                            <p className="text-xl ml-20 mt-1">{item.descExp}</p>
+
+                                        </>
                                     )
                                 })
                             }
