@@ -5,21 +5,43 @@ import axios from 'axios';
 
 function App() {
   const [route, setRoute] = useState('Home');
-  const [game, setGame] = useState([]);
+  const [gameDeals, setGameDeals] = useState([]);
+  const [release, setRelease] = useState([]);
+  const [metacritic, setMetacritic] = useState([]);
 
   useEffect(() => {
-    getGame()
+    getGameDeals()
+    getRelease()
+    getMetacritic()
   }, [])
 
-  async function getGame() {
+  async function getGameDeals() {
     const result = await axios.get(`https://www.cheapshark.com/api/1.0/deals?storeID=1`, {
       params: {
         pageSize: 5
       }
     })
+    setGameDeals(result.data);
+  }
 
-    setGame(result.data);
+  async function getRelease(){
+    const result = await axios.get('https://www.cheapshark.com/api/1.0/deals?storeID=1', {
+      params: {
+        sortBy: 'Release',
+        pageSize: 5
+      }
+    })
+    setRelease(result.data);
+  }
 
+  async function getMetacritic(){
+    const result = await axios.get('https://www.cheapshark.com/api/1.0/deals?storeID=1', {
+      params: {
+        sortBy: 'Metacritic',
+        pageSize: 5
+      }
+    })
+    setMetacritic(result.data);
   }
 
   return (
@@ -29,7 +51,7 @@ function App() {
         <>
           <Navbar route={route} setRoute={setRoute}/>
           <p className="text-4xl text-center mt-7 txt"><strong>Welcome, Kapitan</strong></p>
-          <Home game={game} setGame={setGame}/>
+          <Home game={gameDeals} release={release} metacritic={metacritic} setMetacritic={setMetacritic} setGame={setGameDeals} setRelease={setRelease}/>
         </>
         :
         route === 'Catalog' ?
