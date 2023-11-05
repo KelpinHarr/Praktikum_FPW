@@ -1,0 +1,8 @@
+@font-face{
+    font-family: ABC;
+    src: url('Fruits\ Delight.otf');
+}
+
+.txt {
+    font-family: ABC
+}
