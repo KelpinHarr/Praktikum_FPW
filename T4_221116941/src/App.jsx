@@ -58,6 +58,7 @@ function App() {
         <>
           <Navbar route={route} setRoute={setRoute}/>
           <h1>Ini halaman catalog</h1>
+          
         </>
         :
         <>
