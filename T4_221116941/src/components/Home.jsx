@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import heart from '../assets/heart.svg'
 
 function Home(props){
     return (
@@ -7,7 +8,7 @@ function Home(props){
           <p className="text-2xl ml-48"><strong>Best Deals</strong></p>
           <div className="flex flex-wrap mt-5 justify-center">
             {
-              props.game.map((item, index) => {
+              props.gameDeals.map((item, index) => {
                 return(
                   <>
                     <div className="bg-white pt-3 pr-3 pl-3 rounded-lg shadow-md w-72 ml-8 mt-4">
@@ -15,8 +16,13 @@ function Home(props){
                         <img src={item.thumb} alt="" className='w-full rounded-lg'/>
                       </div>
                       <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
-                      <p className="text-lg text-center mt-2"><s>{item.normalPrice}</s></p>
-                      <p className="text-lg text-center mt-1">{item.salePrice}</p>
+                      <div className="flex justify-center">
+                        <p className="text-lg text-center mt-2"><s>{item.normalPrice}</s></p>
+                        <p className="text-lg text-center mt-2 ml-5">{item.salePrice}</p>
+                      </div>
+                      <div className="flex justify-center">
+                        <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                      </div>
                     </div>
                   </>
                 )
@@ -45,6 +51,9 @@ function Home(props){
                       <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
                       <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                       <p className="text-lg text-center mt-2">{formattedDate}</p>
+                      <div className="flex justify-center">
+                        <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                      </div>
                     </div>
                   </>
                 )
@@ -66,9 +75,14 @@ function Home(props){
                           <img src={item.thumb} alt="" className='w-full rounded-lg'/>
                         </div>
                         <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
-                        <p className="text-lg text-center mt-2"><s>{item.normalPrice}</s></p>
-                        <p className="text-lg text-center mt-1">{item.salePrice}</p>
+                        <div className="flex justify-center">
+                          <p className="text-lg text-center mt-2"><s>{item.normalPrice}</s></p>
+                          <p className="text-lg text-center mt-2 ml-5">{item.salePrice}</p>
+                        </div>
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
+                        <div className="flex justify-center">
+                          <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                        </div>
                       </div>
                       :
                       <div className="bg-white pt-3 pr-3 pl-3 rounded-lg shadow-md w-72 ml-8 mt-4">
@@ -78,6 +92,9 @@ function Home(props){
                         <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
                         <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
+                        <div className="flex justify-center">
+                          <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                        </div>
                       </div>
                     }
                   </>
