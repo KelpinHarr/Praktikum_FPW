@@ -27,7 +27,7 @@ function Wishlist(props){
                                     </div>
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2" ><img src={fullHeart} alt="" /></button>
-                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => removeWishlist(item[index].dealID)}><img src={trash} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => removeWishlist(item.dealID)}><img src={trash} alt="" /></button>
                                     </div>
                                 </div>                                
                             </>
@@ -41,7 +41,7 @@ function Wishlist(props){
                                     <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2"><img src={fullHeart} alt="" /></button>
-                                        <button className="text-lg text-center mt-2 ml-8" ><img src={trash} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => removeWishlist(item.dealID)}><img src={trash} alt="" /></button>
                                     </div>
                                 </div>
                             </>

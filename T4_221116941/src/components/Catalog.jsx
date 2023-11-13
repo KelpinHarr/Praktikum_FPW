@@ -17,12 +17,12 @@ function Catalog(props){
     async function getGame(){
         const result = await axios.get('https://www.cheapshark.com/api/1.0/deals?storeID=1', {
             params: {
-              pageSize: 10,
-              pageNumber: page,
-              title: search
+                pageSize: 10,
+                pageNumber: page,
+                title: search
             }
-          })
-          setGame(result.data);
+        })
+        setGame(result.data);
     }
 
     function handlerPrev(){
@@ -49,7 +49,6 @@ function Catalog(props){
         }
         temp.push(newWishlist);
         props.setWishlist(temp);
-        console.log(props.wishlist);
     }
 
     const handlerSearch = () => {
@@ -94,7 +93,7 @@ function Catalog(props){
                                     <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
                                     <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                                     <div className="flex justify-center mb-5">
-                                        <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                                        <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)} ><img src={favorite[index] == -1 ? fullHeart : heart} alt="" /></button>
                                     </div>
                                 </div>
                             </>
