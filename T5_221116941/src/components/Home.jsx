@@ -1,12 +1,20 @@
-import { useState, useEffect } from "react"
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import heart from '../assets/heart.svg'
+import fullHeart from '../assets/full-heart.svg'
 import cart from '../assets/cart.svg'
 import axios from 'axios';
+import { AddWishList } from "../app/wishSlice";
+import { AddCart } from "../app/cartSlice";
 
 function Home(){
     const [gameDeals, setGameDeals] = useState([]);
     const [release, setRelease] = useState([]);
     const [metacritic, setMetacritic] = useState([]);
+    const [game, setGame] = useState([]);
+    const dispatch = useDispatch();
+    const arrWish = useSelector((state) => state.wishlist.arrWishlist);
+    const arrCart = useSelector((state) => state.cart.arrCart);
 
     useEffect(() => {
       fetchGame()
@@ -33,10 +41,32 @@ function Home(){
         }
       })
 
+      const result = await axios.get('https://www.cheapshark.com/api/1.0/deals?storeID=1')
+
       setGameDeals(deals.data);
       setRelease(releaseDate.data);
       setMetacritic(gameMetacritic.data);
+      setGame(result.data);
     }
+
+    // function toggleFav(dealID){
+    //   let flag = false;
+    //   arrWish.map((item, index) => {
+    //     if (item.dealID == dealID){
+    //       flag = true;
+    //     }
+    //   });
+    //   return flag;
+    // }
+    function toggleFav(dealID){
+      const check = arrWish.find((e) => e.dealID == dealID)
+      let flag = false;
+      if (check){
+        flag = true;
+      }
+      return flag;
+    }
+    
 
     return (
         <>
@@ -57,7 +87,7 @@ function Home(){
                         <p className="text-lg text-center mt-2 ml-5">{item.salePrice}</p>
                       </div>
                       <div className="flex justify-center mb-4">
-                        <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                        <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
                         <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                       </div>
                     </div>
@@ -89,7 +119,7 @@ function Home(){
                       <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                       <p className="text-lg text-center mt-2">{formattedDate}</p>
                       <div className="flex justify-center mb-4">
-                        <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                        <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
                         <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                       </div>
                     </div>
@@ -119,7 +149,7 @@ function Home(){
                         </div>
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
                         <div className="flex justify-center mb-4">
-                          <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                          <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
                           <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                         </div>
                       </div>
@@ -132,7 +162,7 @@ function Home(){
                         <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
                         <div className="flex justify-center mb-4">
-                          <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                          <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
                           <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                         </div>
                       </div>

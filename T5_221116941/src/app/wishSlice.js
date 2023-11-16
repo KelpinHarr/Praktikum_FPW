@@ -9,7 +9,7 @@ export const wishSlice = createSlice({
     initialState,
     reducers:{
         AddWishList: (state, action) => {
-            const {game} = action.payload;
+            const game = action.payload;
             state.arrWishlist.push(game);
         },
         RemoveWishlist: (state, action) => {

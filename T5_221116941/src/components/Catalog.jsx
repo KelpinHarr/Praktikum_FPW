@@ -41,28 +41,12 @@ function Catalog(){
     }
 
     function toggleFav(dealID){
+        const check = arrWish.find((e) => e.dealID == dealID)
         let flag = false;
-        arrWish.map((item, index) => {
-            if (item.dealID == dealID){
-                flag = true;
-            }
-        });
+        if (check){
+            flag = true;
+        }
         return flag;
-    }
-    
-    const handlerFav = (idx) => {
-        try {
-            dispatch(
-                AddWishList(
-                    {
-                        game: game[idx]
-                    }
-                )
-            );
-        }
-        catch (err){
-            console.log(err);
-        }
     }
 
     const handlerCart = (idx) => {
@@ -115,7 +99,7 @@ function Catalog(){
                                         <p className="text-lg mt-2 ml-5">{item.salePrice}</p>
                                     </div>
                                     <div className="flex justify-center mb-5">
-                                        <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)} ><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
+                                        <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))} ><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
                                         <button className="text-lg text-center mt-2 ml-3" onClick={() => handlerCart(index)}><img src={cart} alt="" /></button>
                                     </div>
                                 </div>                                

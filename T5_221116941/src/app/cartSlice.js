@@ -13,7 +13,12 @@ export const cartSlice = createSlice({
             state.arrCart.push(game);
         },
         RemoveCart: (state, action) => {
+            const index = state.arrCart.findIndex((cart) => cart.dealID === action.payload)
 
+            if (index == -1){
+                throw new Error("Not found")
+            }
+            state.arrCart.splice(index, 1);
         }
     }
 });
