@@ -49,15 +49,6 @@ function Home(){
       setGame(result.data);
     }
 
-    // function toggleFav(dealID){
-    //   let flag = false;
-    //   arrWish.map((item, index) => {
-    //     if (item.dealID == dealID){
-    //       flag = true;
-    //     }
-    //   });
-    //   return flag;
-    // }
     function toggleFav(dealID){
       const check = arrWish.find((e) => e.dealID == dealID)
       let flag = false;
@@ -67,6 +58,15 @@ function Home(){
       return flag;
     }
     
+    function toggleCart(title){
+      // const check = arrCart.find((e) => e.dealID == dealID);
+      // let flag = false;
+      // if (check){
+        alert(title + " berhasil ditambahkan ke dalam Cart")
+      //   flag = true;
+      // }
+      // return flag;
+    }
 
     return (
         <>
@@ -88,7 +88,7 @@ function Home(){
                       </div>
                       <div className="flex justify-center mb-4">
                         <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
-                        <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
+                        <button className="text-lg text-center mt-2 ml-3" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" onClick={() => toggleCart(item.title)}/></button>
                       </div>
                     </div>
                   </>
@@ -120,7 +120,7 @@ function Home(){
                       <p className="text-lg text-center mt-2">{formattedDate}</p>
                       <div className="flex justify-center mb-4">
                         <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
-                        <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
+                        <button className="text-lg text-center mt-2 ml-3" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                       </div>
                     </div>
                   </>
@@ -150,7 +150,7 @@ function Home(){
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
                         <div className="flex justify-center mb-4">
                           <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
-                          <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
+                          <button className="text-lg text-center mt-2 ml-3" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                         </div>
                       </div>
                       :
@@ -163,7 +163,7 @@ function Home(){
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
                         <div className="flex justify-center mb-4">
                           <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)}><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
-                          <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
+                          <button className="text-lg text-center mt-2 ml-3" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                         </div>
                       </div>
                     }

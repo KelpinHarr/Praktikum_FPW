@@ -6,6 +6,13 @@ function Cart(){
     const dispatch = useDispatch();
     const arrCart = useSelector((state) => state.cart.arrCart);
 
+    function totalHarga(){
+        let total = 0;
+        arrCart.map((item, index) => {
+            total = total + parseFloat(item.salePrice)
+        })
+        return total;
+    }
     return (
         <>
             <div className="flex mt-7 justify-center ml-3">
@@ -82,21 +89,11 @@ function Cart(){
                             <p className="text-xl mt-5"><strong>Total</strong></p>
                         </div>
                         <div className="right mr-8">
-                            {
-                                arrCart.map((item, index) => {
-                                    return (
-                                        <>
-                                            {
-                                                item.isOnSale == '1' ?
-                                                <p className="text-xl mt-5"><strong>{parseFloat()}</strong></p>
-                                                :
-                                                <p className="text-xl mt-5"><strong>{parseFloat()}</strong></p>
-                                            }
-                                        </>
-                                    )
-                                })
-                            }
+                            <p className="text-xl"><strong>$ {totalHarga()}</strong></p>
                         </div>
+                    </div>
+                    <div className="w-full">
+                        <button className="border rounded-lg bg-green-500 text-white w-full h-8 mt-6">Order</button>
                     </div>
                 </div>
             </div>

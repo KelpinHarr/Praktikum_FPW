@@ -9,8 +9,9 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         AddCart: (state, action) => {
-            const {game} = action.payload;
+            const game = action.payload;
             state.arrCart.push(game);
+            
         },
         RemoveCart: (state, action) => {
             const index = state.arrCart.findIndex((cart) => cart.dealID === action.payload)

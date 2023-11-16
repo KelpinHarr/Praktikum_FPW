@@ -49,26 +49,26 @@ function Catalog(){
         return flag;
     }
 
-    const handlerCart = (idx) => {
-        try {
-            dispatch(
-                AddCart(
-                    {
-                        game: game[idx]
-                    }
-                )
-            );
-            // if (idx > -1){
-            //     alert('Anda sudah menambahkan ' + game[idx].title + ' ke dalam Cart')
-            // }
-            // else {
-                alert(game[idx].title + ' Berhasil ditambahkan ke dalam Cart');
-            // }
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
+    // const handlerCart = (idx) => {
+    //     try {
+    //         dispatch(
+    //             AddCart(
+    //                 {
+    //                     game: game[idx]
+    //                 }
+    //             )
+    //         );
+    //         // if (idx > -1){
+    //         //     alert('Anda sudah menambahkan ' + game[idx].title + ' ke dalam Cart')
+    //         // }
+    //         // else {
+    //             alert(game[idx].title + ' Berhasil ditambahkan ke dalam Cart');
+    //         // }
+    //     }
+    //     catch(err){
+    //         console.log(err);
+    //     }
+    // }
 
     const handlerSearch = () => {
         setSearchGame(search)
@@ -100,7 +100,7 @@ function Catalog(){
                                     </div>
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))} ><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
-                                        <button className="text-lg text-center mt-2 ml-3" onClick={() => handlerCart(index)}><img src={cart} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-3" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                                     </div>
                                 </div>                                
                             </>
@@ -113,8 +113,8 @@ function Catalog(){
                                     <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
                                     <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                                     <div className="flex justify-center mb-5">
-                                        <button className="text-lg text-center mt-2" onClick={() => handlerFav(index)} ><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
-                                        <button className="text-lg text-center mt-2 ml-3" onClick={() => handlerCart(index)}><img src={cart} alt="" /></button>
+                                        <button className="text-lg text-center mt-2" onClick={() => dispatch(AddWishList(item))} ><img src={toggleFav(item.dealID) ? fullHeart : heart} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-3" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                                     </div>
                                 </div>
                             </>

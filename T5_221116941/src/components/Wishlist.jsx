@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RemoveWishlist } from "../app/wishSlice";
+import { AddCart } from "../app/cartSlice";
 import fullHeart from '../assets/full-heart.svg'
 import trash from '../assets/trash.svg'
+import cart from '../assets/cart.svg'
 
 function Wishlist(){
     const dispatch = useDispatch();
     const arrWish = useSelector((state) => state.wishlist.arrWishlist);
+    const arrCart = useSelector((state) => state.cart.arrCart);
 
     return(
         <>
@@ -30,6 +33,7 @@ function Wishlist(){
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2" ><img src={fullHeart} alt="" /></button>
                                         <button className="text-lg text-center mt-2 ml-8" onClick={() => dispatch(RemoveWishlist(item.dealID))}><img src={trash} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                                     </div>
                                 </div>                                
                             </>
@@ -44,6 +48,7 @@ function Wishlist(){
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2"><img src={fullHeart} alt="" /></button>
                                         <button className="text-lg text-center mt-2 ml-8" onClick={() => dispatch(RemoveWishlist(item.dealID))}><img src={trash} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => dispatch(AddCart(item))}><img src={cart} alt="" /></button>
                                     </div>
                                 </div>
                             </>
