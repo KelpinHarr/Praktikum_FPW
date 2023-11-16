@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RemoveWishlist } from "../app/wishSlice";
 import fullHeart from '../assets/full-heart.svg'
 import trash from '../assets/trash.svg'
 
-function Wishlist(props){
-    const removeWishlist = (id) => {
-        props.setWishlist(props.wishlist.filter((wl) => wl.dealID != id))
-    }
+function Wishlist(){
+    const dispatch = useDispatch();
+    const arrWish = useSelector((state) => state.wishlist.arrWishlist);
+
     return(
         <>
             <div className="flex flex-wrap mt-7 justify-center ml-3 mr-3">
             {
-                props.wishlist.map((item, index) => {
+                arrWish.map((item, index) => {
                     return(
                     <>
                         {
@@ -27,7 +29,7 @@ function Wishlist(props){
                                     </div>
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2" ><img src={fullHeart} alt="" /></button>
-                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => removeWishlist(item.dealID)}><img src={trash} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => dispatch(RemoveWishlist(item.dealID))}><img src={trash} alt="" /></button>
                                     </div>
                                 </div>                                
                             </>
@@ -41,7 +43,7 @@ function Wishlist(props){
                                     <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                                     <div className="flex justify-center mb-5">
                                         <button className="text-lg text-center mt-2"><img src={fullHeart} alt="" /></button>
-                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => removeWishlist(item.dealID)}><img src={trash} alt="" /></button>
+                                        <button className="text-lg text-center mt-2 ml-8" onClick={() => dispatch(RemoveWishlist(item.dealID))}><img src={trash} alt="" /></button>
                                     </div>
                                 </div>
                             </>

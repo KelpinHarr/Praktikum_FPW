@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import heart from '../assets/heart.svg'
+import cart from '../assets/cart.svg'
 import axios from 'axios';
 
 function Home(){
@@ -55,8 +56,9 @@ function Home(){
                         <p className="text-lg text-center mt-2"><s>{item.normalPrice}</s></p>
                         <p className="text-lg text-center mt-2 ml-5">{item.salePrice}</p>
                       </div>
-                      <div className="flex justify-center">
+                      <div className="flex justify-center mb-4">
                         <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                        <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                       </div>
                     </div>
                   </>
@@ -86,8 +88,9 @@ function Home(){
                       <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
                       <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                       <p className="text-lg text-center mt-2">{formattedDate}</p>
-                      <div className="flex justify-center">
+                      <div className="flex justify-center mb-4">
                         <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                        <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                       </div>
                     </div>
                   </>
@@ -115,8 +118,9 @@ function Home(){
                           <p className="text-lg text-center mt-2 ml-5">{item.salePrice}</p>
                         </div>
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mb-4">
                           <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                          <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                         </div>
                       </div>
                       :
@@ -127,8 +131,9 @@ function Home(){
                         <p className="text-xl text-center mt-4"><strong>{item.title}</strong></p>
                         <p className="text-lg text-center mt-2">{item.normalPrice}</p>
                         <p className="text-lg text-center mt-2">{item.metacriticScore}</p>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mb-4">
                           <button className="text-lg text-center mt-2"><img src={heart} alt="" /></button>
+                          <button className="text-lg text-center mt-2 ml-3"><img src={cart} alt="" /></button>
                         </div>
                       </div>
                     }
