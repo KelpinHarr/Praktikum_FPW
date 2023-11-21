@@ -51,7 +51,6 @@ app.post('/register', function(req, res){
         user.push(newUser);
         res.status(201).json(newUser);
     }  
-
 })
 
 app.post('/login', function(req, res){

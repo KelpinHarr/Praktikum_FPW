@@ -4,19 +4,27 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 
 function Login(){
-    let [text, setText] = useState('');
-    let [errMsg, setErrMsg] = useState('');
+    const [text, setText] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [userLogin, setUserLogin] = useState([]);
+
     const navigate = useNavigate();
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
+    useEffect(() => {
+        handleLogin()
+    }, []);
+
     const handleLogin = async (e) => {
         try {
-            await axios.post("http://localhost:3000/login", {
+            const result = await axios.post("http://localhost:3000/login", {
                 email: e.email,
                 password: e.password
             })
             setText("Login Success");
+            setUserLogin(e.email);
+            console.log(e.email);
             navigate('/stories')
             reset()
         }

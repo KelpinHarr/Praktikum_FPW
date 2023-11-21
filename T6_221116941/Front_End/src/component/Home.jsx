@@ -5,23 +5,24 @@ import axios from "axios";
 
 function Home(){
     const navigate = useNavigate();
-    // const [isHome, setIsHome] = useState(true);
-    const [isHome, setIsHome] = useState(() => {
-        const storedIsHome = localStorage.getItem('isHome');
-        return storedIsHome ? JSON.parse(storedIsHome) : true;
-    });
-    const [user, setUser] = useState([]);
+    const [isHome, setIsHome] = useState(true);
+    // const [isHome, setIsHome] = useState(() => {
+    //     const storedIsHome = localStorage.getItem('isHome');
+    //     return storedIsHome ? JSON.parse(storedIsHome) : true;
+    // });
+    
+    // const [user, setUser] = useState([]);
 
     const handleLogin = () => {
         navigate('/login');
         setIsHome(false)
-        localStorage.setItem('isHome', JSON.stringify(false));
+        // localStorage.setItem('isHome', JSON.stringify(false));
     }
 
     const handleRegister = () => {
         navigate('/register');
         setIsHome(false)
-        localStorage.setItem('isHome', JSON.stringify(false));
+        // localStorage.setItem('isHome', JSON.stringify(false));
     }
 
     if (isHome === undefined){
