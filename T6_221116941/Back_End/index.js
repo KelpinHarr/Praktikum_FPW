@@ -144,3 +144,48 @@ app.put('/user/:email', function(req, res){
         res.status(404).json({"message" : "User not found!"})
     }
 })
+
+app.get('/stories/:story_id/overview', function(req, res){
+    const storyId = req.params.story_id;
+    // const title = req.body.title;
+    // const thumb = req.body.thumb;
+
+    const findStory = story.find(s => s.id == storyId);
+
+    if (findStory){
+        // findStory.title = title || findStory.title;
+        // findStory.thumb = thumb || findStory.thumb;
+
+        // const result = {
+        //     "Title" : findStory.title,
+        //     "Thumbnail" : findStory.thumb
+        // }
+        res.status(200).json(findStory);
+    }
+    else {
+        res.status(404).json({"message" : "Story not found"})
+    }
+})
+
+app.put('/stories/:story_id/overview', function(req, res){
+    const storyId = req.params.story_id;
+
+    const findStory = story.find(s => s.id == storyId);
+    if (findStory){
+        findStory.title = title || findStory.title;
+        findStory.thumb = thumb || findStory.thumb;
+
+        const result = {
+            "Title" : findStory.title,
+            "Thumbnail" : findStory.thumb
+        }
+        res.status(200).json(result);
+    }
+    else {
+        res.status(404).json({"message" : "Story not found"})
+    }
+})
+
+app.delete('stories/:story_id/overview', function(req, res){
+    
+})
