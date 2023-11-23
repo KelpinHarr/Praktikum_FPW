@@ -15,19 +15,21 @@ function Register(){
     async function getUser(){
         const result  = await axios.get('http://localhost:3000/')
         setUser(result.data);
+        console.log(user);
     }
 
     const handleRegister = async (e) => {
         try {
-            await axios.post("http://localhost:3000/register", {
-                email: e.email,
-                nama: e.nama,
-                password: e.password,
-            })
-
             if (e.password == e.confirm_password){
+                const result = await axios.post("http://localhost:3000/register", {
+                    email: e.email,
+                    first_name: e.first_name,
+                    last_name: e.last_name,
+                    password: e.password,
+                })
                 setText("Register Success");
                 console.log(user);
+                
                 reset()
             }
             else {
@@ -35,7 +37,7 @@ function Register(){
             }
         }
         catch(err){
-            console.log(err);
+            console.log(err.response.data.message);
             setErrMsg(err.response.data.message);
             reset()
         }
@@ -62,16 +64,32 @@ function Register(){
                         }} className="mt-1 text-center">{errors.email.message}</span>}
 
                         <p className="text-xl text-center mt-8">Nama</p>
-                        <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" placeholder="Nama" {...register('nama', {
-                            required: {
-                                value: true,
-                                message: 'Nama tidak boleh kosong'
-                            }
-                        })}/>
+                        <div className="flex w-full">
+                            <div className="w-1/2">
+                                <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" placeholder="First Name" {...register('first_name', {
+                                    required: {
+                                        value: true,
+                                        message: 'First name tidak boleh kosong'
+                                    }
+                                })}/>
 
-                        {errors.nama && <span style={{
-                            color: "red"
-                        }} className="mt-1 text-center">{errors.nama.message}</span>}
+                                {errors.first_name && <span style={{
+                                    color: "red"
+                                }} className="mt-1 text-center">{errors.first_name.message}</span>}
+                            </div>
+                            <div className="w-1/2 ml-5">
+                                <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" placeholder="Last Name" {...register('last_name', {
+                                    required: {
+                                        value: true,
+                                        message: 'Last name tidak boleh kosong'
+                                    }
+                                })}/>
+
+                                {errors.last_name && <span style={{
+                                    color: "red"
+                                }} className="mt-1 text-center">{errors.last_name.message}</span>}
+                            </div>
+                        </div>
 
                         <p className="text-xl text-center mt-8">Password</p>
                         <input type="password" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" placeholder="Password" {...register('password', {
@@ -86,7 +104,7 @@ function Register(){
                         }} className="mt-1 text-center">{errors.password.message}</span>}                        
 
                         <p className="text-xl text-center mt-8">Confirm Password</p>
-                        <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" placeholder="Confirm Password" {...register('confirm_password', {
+                        <input type="password" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" placeholder="Confirm Password" {...register('confirm_password', {
                             required: {
                                 value: true,
                                 message: 'Confirm Password tidak boleh kosong'
@@ -111,6 +129,15 @@ function Register(){
                     }
                 </div>
             </div>
+            {/* {
+                user.map((u) => {
+                    return(
+                        <>
+                            <p>{u.email}</p>
+                        </>
+                    )
+                })
+            } */}
         </>
     )
 }

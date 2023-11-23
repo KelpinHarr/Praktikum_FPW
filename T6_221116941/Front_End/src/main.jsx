@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-// import App from './App.jsx'
-// import './index.css'
 import Home from './component/Home';
 import Login from './component/Login';
 import Register from './component/Register';
 import Stories from './component/Stories';
+import DataHandler from './component/DataHandler';
+import store from "./app/store";
+import Profile from './component/Profile';
+import { Provider } from "react-redux";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -20,16 +22,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <Register/>
+        element: <Register/>,
       },
       {
         path: "/stories",
         element: <Stories/>
+      },
+      {
+        path: "/profile",
+        element: <Profile />
       }
     ]
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
 )
