@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import Navbar from "./Navbar";
+import { doOverview } from "../app/story";
 
 function Stories(){
     const myakun = useSelector((state)=> state.myakun.userLogin);
@@ -12,6 +13,7 @@ function Stories(){
     const [userLogin, setUserLogin] = useState([]);
     const [story, setStory] = useState([]);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -25,6 +27,21 @@ function Stories(){
         setStory(result.data);
     }
 
+    async function handleOverview(id){
+        dispatch(
+            doOverview({
+                story_id: id
+            })
+        );
+        navigate(`/stories/${id}/overview`);
+        // try{
+        //     const result = await axios.get(`http://localhost:3000/stories/${id}/overview`)
+        // }
+        // catch(err){
+
+        // }
+    }
+
     return(
         <>  
             <Navbar />
@@ -33,7 +50,7 @@ function Stories(){
                     story.map((item, index) => {
                         return(
                             <>
-                                <div className="bg-white pt-5 pr-5 pl-5 rounded-lg shadow-md w-96 ml-8 mt-7">
+                                <div className="bg-white pt-5 pr-5 pl-5 rounded-lg shadow-md w-96 ml-8 mt-7" key={index} onClick={() => handleOverview(item.id)}>
                                     <div className="flex justify-center">
                                         <img src={item.thumb} alt="" className="rounded-lg"/>
                                     </div>

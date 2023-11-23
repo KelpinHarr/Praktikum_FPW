@@ -169,6 +169,8 @@ app.get('/stories/:story_id/overview', function(req, res){
 
 app.put('/stories/:story_id/overview', function(req, res){
     const storyId = req.params.story_id;
+    const title = req.body.title;
+    const thumb = req.body.thumb;
 
     const findStory = story.find(s => s.id == storyId);
     if (findStory){
@@ -186,6 +188,16 @@ app.put('/stories/:story_id/overview', function(req, res){
     }
 })
 
-app.delete('stories/:story_id/overview', function(req, res){
+app.delete('/stories/:story_id/overview', function(req, res){
+    const storyId = req.params.story_id;
     
+    const storyIdx = story.findIndex(story => story.id == storyId);
+
+    if (storyIdx !== -1){
+        story.splice(storyIdx, 1);
+        res.status(200).json({"message" : "Story deleted"})
+    }
+    else {
+        res.status(404).json({"message" : "Story not found"})
+    }
 })

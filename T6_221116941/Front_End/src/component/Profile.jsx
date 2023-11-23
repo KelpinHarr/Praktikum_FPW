@@ -14,7 +14,7 @@ function Profile(){
 
     useEffect(() => {
         getUserByEmail()
-    }, [])
+    }, [mode])
 
     async function getUserByEmail(){
         const result = await axios.get(`http://localhost:3000/user/${myakun.email}`)
