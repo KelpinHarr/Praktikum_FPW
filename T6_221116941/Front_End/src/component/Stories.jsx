@@ -42,6 +42,11 @@ function Stories(){
         // }
     }
 
+    async function handlenew() {
+        const result = await axios.get("http://localhost:3000/registerstory/${myakun.email}");
+        handleOverview(result.data['id']);
+    }
+
     return(
         <>  
             <Navbar />
@@ -62,6 +67,14 @@ function Stories(){
                         )
                     })
                 }
+                <div className="bg-white pt-5 pr-5 pl-5 rounded-lg shadow-md w-96 ml-8 mt-7" onClick={() => handlenew()}>
+                    <div className="flex justify-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5948/5948875.png" style={{ height: "200px" }} alt="" className="rounded-lg"/>
+                    </div>
+                    <div>
+                        <p className="text-xl mt-5 mb-5"><strong>New Story</strong></p>
+                    </div>
+                </div>
             </div>
         </>
     )

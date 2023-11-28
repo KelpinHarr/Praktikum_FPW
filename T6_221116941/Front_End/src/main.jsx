@@ -6,6 +6,7 @@ import Register from './component/Register';
 import Stories from './component/Stories';
 import DataHandler from './component/DataHandler';
 import Overview from './component/Overview';
+import Character from './component/Character';
 import store from "./app/store";
 import Profile from './component/Profile';
 import { Provider } from "react-redux";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/stories/:story_id/overview",
         element: <Overview />
+      },
+      {
+        path: "/stories/:story_id/character",
+        element: <Character />
       }
     ]
   }

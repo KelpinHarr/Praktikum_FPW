@@ -40,10 +40,18 @@ function Login() {
             else {
                 setText(res.message);
             }
-            // setUserLogin(e.email);
-            // console.log(e.email);
-            // navigate('/stories')
-            // reset()
+            if(res.message == null) {
+                setText("Login Success");
+                setErrMsg("");
+                console.log(user);                    
+                reset()    
+            }
+            else if (res.message == "Email tidak terdaftar"){
+                setErrMsg("Email tidak terdaftar");
+            }
+            else if (res.message == "Password salah"){
+                setErrMsg("Password salah")
+            }
         }
         catch(err){
             console.log("error"); 

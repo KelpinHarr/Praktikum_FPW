@@ -11,6 +11,7 @@ function Profile(){
     const [mode, setMode] = useState(0);
     const [text, setText] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [valueChar, setValueChar] = useState({});
 
     useEffect(() => {
         getUserByEmail()
@@ -19,6 +20,7 @@ function Profile(){
     async function getUserByEmail(){
         const result = await axios.get(`http://localhost:3000/user/${myakun.email}`)
         setUserLogin(result.data[0]);
+        setValueChar(result.data[0]); 
     }
 
     async function updateUser(e){
@@ -29,7 +31,12 @@ function Profile(){
                     last_name: e.last_name,
                     password: e.password
                 })
-                setText("Data updated!")
+                let res = result.data;
+
+                if (res.message == null){
+                    setText("Data updated!")
+                    setErrMsg("")
+                }
             }
             else {
                 setErrMsg("Password tidak sama!")
@@ -41,7 +48,7 @@ function Profile(){
         }
     }
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({values: valueChar});
 
     function handlerChange(){
         setMode(1)
@@ -86,7 +93,7 @@ function Profile(){
                         <form action="">
                             <div className="flex w-full">
                                 <div className="w-1/2">
-                                    <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" value={userLogin.first_name} {...register('first_name', {
+                                    <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" {...register('first_name', {
                                         required: {
                                             value: true,
                                             message: 'First name tidak boleh kosong'
@@ -98,7 +105,7 @@ function Profile(){
                                     }} className="mt-1 text-center">{errors.first_name.message}</span>}
                                 </div>
                                 <div className="w-1/2 ml-5">
-                                    <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" value={userLogin.last_name} {...register('last_name', {
+                                    <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" {...register('last_name', {
                                         required: {
                                             value: true,
                                             message: 'Last name tidak boleh kosong'
@@ -111,10 +118,19 @@ function Profile(){
                                 </div>
                             </div>
                             <div className="w-full">
-                                <input type="text" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" value={userLogin.email} disabled/>
+                                <input type="email" readOnly="readonly" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" {...register('email', {
+                                    required: {
+                                        value: true,
+                                        message: 'Email tidak boleh kosong'
+                                    }
+                                })}/>
+
+                                {errors.email && <span style={{
+                                    color: "red"
+                                }} className="mt-1 text-center">{errors.email.message}</span>}
                             </div>
                             <div className="w-full">
-                                <input type="password" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" value={userLogin.password} {...register('password', {
+                                <input type="password" className="w-full border border-1 border-black rounded-lg px-2 py-1 mt-3" {...register('password', {
                                     required: {
                                         value: true,
                                         message: 'Password tidak boleh kosong'
@@ -138,15 +154,15 @@ function Profile(){
                             </div>
                         </form>
                         <div className="flex justify-center">
-                            <button type="submit" className="w-1/2 border border-1 bg-green-500 rounded-lg py-1 mt-3" onClick={handleSubmit(updateUser())}><strong>Save Changes</strong></button>
+                            <button type="submit" className="w-1/2 border border-1 bg-green-500 rounded-lg py-1 mt-3" onClick={handleSubmit(updateUser)}><strong>Save Changes</strong></button>
                         </div>
+                        {
+                        errMsg == '' ? 
+                            <p className="text-xl text-center text-green-500"><strong>{text}</strong></p>
+                            :
+                            <p className="text-xl text-center text-red-500"><strong>{errMsg}</strong></p>
+                        }
                     </div>
-                    {
-                    errMsg == '' ? 
-                        <p className="text-xl text-center text-green-500"><strong>{text}</strong></p>
-                        :
-                        <p className="text-xl text-center text-red-500"><strong>{errMsg}</strong></p>
-                    }
                 </div>
             }
         </>

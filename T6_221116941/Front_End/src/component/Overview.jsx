@@ -12,6 +12,7 @@ function Overview(){
     const [errMsg, setErrMsg] = useState('');
     const [mode, setMode] = useState(0);
     const navigate = useNavigate()
+    const [valueChar, setValueChar] = useState({});
 
     useEffect(() => {
         getStory()
@@ -19,9 +20,9 @@ function Overview(){
 
     async function getStory(){
         const result = await axios.get(`http://localhost:3000/stories/${detailStory.story_id}/overview`)
-
         console.log(result.data);
         setStory(result.data)
+        setValueChar(result.data);
     }
 
     async function updateStory(e){
@@ -54,7 +55,15 @@ function Overview(){
         setMode(1)
     }
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    function handleOverview() {
+        navigate(`/stories/${detailStory.story_id}/overview`); 
+    }
+
+    function handleCharacter() {
+        navigate(`/stories/${detailStory.story_id}/character`); 
+    }
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({values: valueChar});
 
     return (
         <>  
@@ -62,9 +71,8 @@ function Overview(){
             <div className="flex justify-between">
                 <p className="text-4xl ml-20 mt-5"><strong>{story.title}</strong></p>
                 <div className="flex">
-                    <button className="w-40 border border-1 bg-green-500 rounded-lg py-1 mr-20 mt-5"><strong>Overview</strong></button>
-                    <button className="w-40 border border-1 bg-green-500 rounded-lg py-1 mr-20 mt-5">Character</button>
-
+                    <button onClick={() => handleOverview()} className="w-40 border border-1 bg-green-500 rounded-lg py-1 mr-20 mt-5"><strong>Overview</strong></button>
+                    <button onClick={() => handleCharacter()} className="w-40 border border-1 bg-green-500 rounded-lg py-1 mr-20 mt-5">Character</button>
                 </div>
             </div>
             <div className="flex justify-center">
@@ -76,12 +84,21 @@ function Overview(){
                                     mode == 0 ?
                                     <>
                                         <p className="text-2xl">{story.title}</p>
-                                        <button className="mt-2 ml-4" onClick={handlerEdit}>Edit</button>
+                                        <button type= 'button' className="mt-2 ml-4" onClick={handlerEdit}>Edit</button>
                                     </>
                                     :
                                     <>
-                                        <input type="text" className='text-2xl' value={story.title} />
-                                        <button className="mt-2" onClick={handlerEdit}>Edit</button>
+                                        <input type="text" className='text-2xl' {...register('title', {
+                                            required:{
+                                                value: true,
+                                                message: "Title tidak boleh kosong"
+                                            }
+                                        })}/>
+
+                                    {errors.title && <span style={{
+                                        color: "red"
+                                    }} className="mt-1 text-center">{errors.title.message}</span>}
+                                        <button type='button' className="mt-2" onClick={handlerEdit}>Edit</button>
                                     </>
                                 }
                                     {/* {errors.title && <span style={{
@@ -89,7 +106,7 @@ function Overview(){
                                     }} className="mt-1 text-center">{errors.title.message}</span>}          */}
                                 
                             </div>
-                            <button className="w-40 border border-1 bg-red-400 rounded-lg py-1 mr-10 text-white" onClick={deleteStory}>Delete</button>
+                            <button type='button' className="w-40 border border-1 bg-red-400 rounded-lg py-1 mr-10 text-white" onClick={deleteStory}>Delete</button>
                         </div>
                         <div className="flex justify-center">
                             <img src={story.thumb} alt="" className="mt-8"/>

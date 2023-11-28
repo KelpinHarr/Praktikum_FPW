@@ -36,6 +36,28 @@ let story = [
     }
 ]
 
+let character = [
+    {
+        id: 1,
+        storyid: 1,
+        name: 'Pak Sandi',
+        title: 'Main Character',
+        age: 35,
+        characteristic: "Baik dan Jujur",
+        background: "ini background pak sandi"
+    },
+    {
+        id: 2,
+        storyid: 1,
+        name: 'Bu Sandi',
+        title: 'Main Character',
+        age: 31,
+        characteristic: "Jahat",
+        background: "ini background bu sandi"
+    },
+]
+
+
 app.get('/', function(req, res){
     return res.status(200).json(user);
 })
@@ -200,4 +222,79 @@ app.delete('/stories/:story_id/overview', function(req, res){
     else {
         res.status(404).json({"message" : "Story not found"})
     }
+})
+
+
+app.get('/registerstory/:email', function(req, res){
+    const email = req.params.email;
+    const newStory = {
+        "id" : story.length + 1,
+        "title" : "Untitled#" + (story.length + 1),
+        "thumb" : "https://static.thenounproject.com/png/2965948-200.png",
+        "by": email
+    }
+    story.push(newStory);
+    return res.status(200).json(newStory);
+})
+
+app.get('/characters', function(req, res){
+    return res.status(200).json(character);
+})
+
+app.get('/characters/:storyid', function(req, res){
+    let temp = []
+    character.map((item) => {
+        if (item.storyid == req.params.storyid){
+            temp.push(item)
+        }
+    })
+    return res.status(200).json(temp);
+})
+
+app.post('/registercharacter', function(req, res){
+    const storyid = req.body.storyid;
+    const name = req.body.name;
+    const title = req.body.title;
+    const age = req.body.age;
+    const characteristic = req.body.characteristic;
+    const background = req.body.background;
+
+    const newCharacter = {
+        "id" : character.length + 1,
+        "storyid" : storyid,
+        "name" : name,
+        "title" : title,
+        "age" : age,
+        "characteristic" : characteristic,
+        "background" : background,
+    }
+    character.push(newCharacter);
+    return res.status(200).json(newCharacter);
+})
+
+app.post('/updatecharacter', function(req, res){
+    const storyid = req.body.storyid;
+    const id = req.body.id;
+    const name = req.body.name;
+    const title = req.body.title;
+    const age = req.body.age;
+    const characteristic = req.body.characteristic;
+    const background = req.body.background;
+
+    const newCharacter = {
+        "id" : id,
+        "storyid" : storyid,
+        "name" : name,
+        "title" : title,
+        "age" : age,
+        "characteristic" : characteristic,
+        "background" : background,
+    }
+    for(var i = 0; i < character.length; i++) {
+        if(character[i].id == id) {
+            character[i] = newCharacter; 
+        }
+    }
+
+    return res.status(200).json(newCharacter);
 })

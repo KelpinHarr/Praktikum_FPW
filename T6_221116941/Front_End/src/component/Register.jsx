@@ -10,7 +10,7 @@ function Register(){
 
     useEffect(() => {
         getUser()
-    }, [])
+    }, [text, errMsg])
 
     async function getUser(){
         const result  = await axios.get('http://localhost:3000/')
@@ -27,10 +27,16 @@ function Register(){
                     last_name: e.last_name,
                     password: e.password,
                 })
-                setText("Register Success");
-                console.log(user);
-                
-                reset()
+                var res = result.data; 
+                if(res.message == null) {
+                    setText("Register Success");
+                    setErrMsg("");
+                    console.log(user);                    
+                    reset()    
+                }
+                else if (res.message == "Email sudah terdaftar"){
+                    setErrMsg("Email sudah terdaftar");
+                }
             }
             else {
                 setErrMsg("Password tidak sama");
