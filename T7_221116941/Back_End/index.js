@@ -20,6 +20,7 @@ app.listen(port, async () => {
     console.log(`listening on port ${port}!`)
 })
 
+//Player
 app.get('/api/players', async function(req, res){
     const result = await Player.find()
 
@@ -44,8 +45,69 @@ app.post('/api/players', async function(req, res){
     const result = await newPlayer.save();
 
     const msg = {
-        result,
-        "message" : "Player inserted"
+        "message" : "Player added!",
+        result
     }
     res.status(201).json(msg);
+})
+
+app.put('/api/players/:nama', async function(req, res){
+    const nama = req.params.nama;
+    const { name, age, position, nationality, number } = req.body;
+
+    try{
+        const cariPlayer = await Player.find({
+            name: nama
+        })
+
+        if (cariPlayer.length == 0){
+            const result = {
+                "message" : "Player not found!"
+            }
+            res.status(404).json(result);
+        }
+        else {
+            const updatePlayer = await Player.updateOne({
+                name: nama
+            }, {
+                $set: {
+                    name: name,
+                    age: age,
+                    position: position,
+                    nationality: nationality,
+                    number: number
+                }
+            })
+            res.status(200).json(updatePlayer);
+        }
+    }
+    catch(err){
+        res.status(500).json({message: err.message});
+    }
+})
+
+app.delete('/api/players/:nama', async function(req, res){
+    const nama = req.params.nama;
+
+    try{
+        const cariPlayer = await Player.find({
+            name: nama
+        })
+
+        if (cariPlayer.length == 0){
+            const result = {
+                "message" : "Player not found!"
+            }
+            res.status(404).json(result);
+        }
+        else {
+            const deletePlayer = await Player.deleteOne({
+                name: nama
+            })
+            res.status(200).json({message: "Player deleted!"});
+        }
+    }
+    catch(err){
+        res.status(500).json({message: err.message});
+    }
 })
